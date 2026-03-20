@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') %>
+
+<h4 class="fw-bold mb-3">All Bookings (Admin)</h4>
+
+<% if (bookings.length === 0) { %>
+  <p class="text-muted text-small">No bookings yet.</p>
+<% } else { %>
+  <div class="table-responsive">
+    <table class="table table-sm align-middle">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>User</th>
+          <th>Hotel</th>
+          <th>Dates</th>
+          <th>Guests</th>
+          <th>Total Amount</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bookings.forEach((booking, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td>
+            <%= booking.user.username %><br />
+            <span class="text-small text-muted"><%= booking.user.email %></span>
+          </td>
+          <td><%= booking.hotel.title %></td>
+          <td class="text-small">
+            <%= booking.checkIn.toDateString() %> —
+            <%= booking.checkOut.toDateString() %>
+          </td>
+          <td><%= booking.guests %></td>
+          <td>₹ <%= booking.totalPrice.toLocaleString("en-IN") %></td>
+          <td class="text-small"><%= booking.createdAt.toDateString() %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>

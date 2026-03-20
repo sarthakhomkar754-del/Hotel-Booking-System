@@ -1,0 +1,41 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card card-auth p-4">
+      <h4 class="auth-title mb-3 text-center">Create an account</h4>
+      <p class="text-small text-muted text-center mb-3">
+        Book hotels faster and keep track of all your bookings in one place.
+      </p>
+
+      <form method="POST" action="/register" class="needs-validation" novalidate>
+        <div class="mb-2">
+          <label class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" required />
+          <div class="invalid-feedback">Please enter a username.</div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" required />
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" required minlength="4" />
+          <div class="invalid-feedback">Please enter a password (min 4 characters).</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-pill w-100 mb-2">
+          Sign up
+        </button>
+
+        <p class="text-small text-center mb-0">
+          Already have an account?
+          <a href="/login">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

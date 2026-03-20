@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+      <i class="fa-solid fa-hotel"></i>
+      <span>HevenHeights</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link <%= (activePage === 'listings') ? 'active' : '' %>" href="/listings">
+            Browse Hotels
+          </a>
+        </li>
+
+        <% if (currentUser && !isAdmin) { %>
+          <li class="nav-item">
+            <a class="nav-link <%= (activePage === 'myBookings') ? 'active' : '' %>" href="/my-bookings">
+              My Bookings
+            </a>
+          </li>
+          <% } %>
+
+
+            <% if (isAdmin) { %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle <%= (activePage === 'adminBookings' || (activePage === 'listings' && isAdmin)) ? 'active' : '' %>"
+                  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Admin Panel
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/listings">Manage Listings</a></li>
+                  <li><a class="dropdown-item" href="/admin/bookings">View User Bookings</a></li>
+                </ul>
+              </li>
+              <% } %>
+      </ul>
+
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <% if (!currentUser) { %>
+          <li class="nav-item me-2">
+            <a class="btn btn-outline-light-grey btn-sm btn-pill" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary btn-sm btn-pill" href="/register">Sign up</a>
+          </li>
+          <% } else { %>
+            <li class="nav-item me-3 text-small">
+              Hello, <strong>
+                <%= currentUser.username %>
+              </strong>
+              <% if (isAdmin) { %>
+                <span class="badge bg-secondary ms-1">Admin</span>
+                <% } %>
+            </li>
+            <li class="nav-item">
+              <form method="POST" action="/logout">
+                <button class="btn btn-outline-light-grey btn-sm btn-pill" type="submit">
+                  Logout
+                </button>
+              </form>
+            </li>
+            <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
